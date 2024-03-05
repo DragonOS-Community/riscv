@@ -45,3 +45,15 @@ set_clear_csr!(
 set_clear_csr!(
     /// Supervisor External Interrupt Enable
     , set_sext, clear_sext, 1 << 9);
+
+/// Set the bits in the register
+#[inline]
+pub unsafe fn set_bits(bits: usize) {
+    _set(bits)
+}
+
+/// Clear the bits in the register
+#[inline]
+pub unsafe fn clear_bits(bits: usize) {
+    _clear(bits)
+}

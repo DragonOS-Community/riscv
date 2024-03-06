@@ -109,3 +109,6 @@ pub use self::mhpmeventx::*;
 // TODO: Debug/Trace Registers (shared with Debug Mode)
 
 // TODO: Debug Mode Registers
+
+// Others
+pub mod tp;

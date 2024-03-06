@@ -1,9 +1,17 @@
 //! scause register
 
+use core::fmt::Debug;
+
 /// scause register
 #[derive(Clone, Copy)]
 pub struct Scause {
     bits: usize,
+}
+
+impl Debug for Scause {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Scause").field("bits", &self.bits).finish()
+    }
 }
 
 /// Trap Cause

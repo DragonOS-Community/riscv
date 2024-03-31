@@ -51,6 +51,15 @@ impl Sstatus {
         }
     }
 
+    /// Update the status of the floating-point unit
+    /// 
+    /// Note: This function only updates the FS field.
+    #[inline]
+    pub fn update_fs(&mut self, fs: FS) {
+        self.bits &= !(0x3 << 13); // clear previous value
+        self.bits |= (fs as usize) << 13;
+    }
+
     /// The status of additional user-mode extensions
     /// and associated state
     #[inline]

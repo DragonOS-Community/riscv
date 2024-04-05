@@ -23,6 +23,16 @@ impl Sstatus {
         self.bits & (1 << 1) != 0
     }
 
+    /// update the Supervisor Interrupt Enable field
+    #[inline]
+    pub fn update_sie(&mut self, value: bool) {
+        if value {
+            self.bits |= 1 << 1;
+        } else {
+            self.bits &= !(1 << 1);
+        }
+    }
+
     /// Supervisor Previous Interrupt Enable
     #[inline]
     pub fn spie(&self) -> bool {
@@ -35,6 +45,15 @@ impl Sstatus {
         match self.bits & (1 << 8) != 0 {
             true => SPP::Supervisor,
             false => SPP::User,
+        }
+    }
+
+    /// update the Supervisor Previous Privilege Mode field
+    #[inline]
+    pub fn update_spp(&mut self, spp: SPP) {
+        match spp {
+            SPP::Supervisor => self.bits |= 1 << 8,
+            SPP::User => self.bits &= !(1 << 8),
         }
     }
 
@@ -52,7 +71,7 @@ impl Sstatus {
     }
 
     /// Update the status of the floating-point unit
-    /// 
+    ///
     /// Note: This function only updates the FS field.
     #[inline]
     pub fn update_fs(&mut self, fs: FS) {

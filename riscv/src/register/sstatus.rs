@@ -167,3 +167,9 @@ pub unsafe fn set_fs(fs: FS) {
     value |= (fs as usize) << 13;
     _write(value);
 }
+
+impl From<usize> for Sstatus {
+    fn from(val: usize) -> Self {
+        Sstatus { bits: val }
+    }
+}

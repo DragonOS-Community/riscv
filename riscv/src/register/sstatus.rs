@@ -99,6 +99,15 @@ impl Sstatus {
         self.bits & (1 << 18) != 0
     }
 
+    #[inline]
+    pub fn update_sum(&mut self, value: bool) {
+        if value {
+            self.bits |= 1 << 18;
+        } else {
+            self.bits &= !(1 << 18);
+        }
+    }
+
     /// Make eXecutable Readable
     #[inline]
     pub fn mxr(&self) -> bool {
